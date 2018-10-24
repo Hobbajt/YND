@@ -38,7 +38,7 @@ class ImagesListFragment : BaseMVPFragment<ImagesListPresenter>(), ImagesListCon
     {
         rvImages.layoutManager = LinearLayoutManager(activity)
         val thumbnailSize = resources.getDimensionPixelSize(R.dimen.thumbnail_size)
-        rvImages.adapter = ImagesListAdapter(/*displayImageOptions, */presenter, presenter, thumbnailSize)
+        rvImages.adapter = ImagesListAdapter(presenter, presenter, thumbnailSize)
     }
 
     override fun onDestroy()
