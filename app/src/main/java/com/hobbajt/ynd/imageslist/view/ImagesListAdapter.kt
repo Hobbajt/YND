@@ -15,8 +15,7 @@ import com.nostra13.universalimageloader.core.assist.FailReason
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener
 import kotlinx.android.synthetic.main.item_image.view.*
 
-class ImagesListAdapter(/*private val displayImageOptions: DisplayImageOptions,*/
-                        private val thumbnailLoadListener: ThumbnailLoadListener,
+class ImagesListAdapter(private val thumbnailLoadListener: ThumbnailLoadListener,
                         private val itemClickListener: ItemClickListener,
                         private val thumbnailSize: Int) : RecyclerView.Adapter<ImagesListAdapter.ImageItemHolder>()
 {
@@ -59,14 +58,6 @@ class ImagesListAdapter(/*private val displayImageOptions: DisplayImageOptions,*
             val position = adapterPosition
 
             val thumbnailUrl = ImageUrlCreator.createThumbnailUrl(image.id, thumbnailSize)
-/*
-            val options = DisplayImageOptions.Builder()
-                    .resetViewBeforeLoading(true)
-                    .bitmapConfig(Bitmap.Config.RGB_565)
-                    .cacheOnDisk(true)
-                    .showImageOnFail(R.drawable.ic_error)
-                    .build()*/
-
 
             imageLoader.displayImage(thumbnailUrl, imgImage, object : ImageLoadingListener
             {
