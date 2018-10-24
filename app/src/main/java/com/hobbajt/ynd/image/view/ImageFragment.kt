@@ -76,7 +76,7 @@ class ImageFragment : BaseMVPFragment<ImagePresenter>(), ImageContract.View
         {
             override fun onLoadingComplete(imageUri: String?, view: View?, loadedImage: Bitmap?)
             {
-                presenter.onImageDisplayed()
+                presenter.onImageLoadEnded()
             }
 
             override fun onLoadingStarted(imageUri: String?, view: View?)
@@ -91,7 +91,7 @@ class ImageFragment : BaseMVPFragment<ImagePresenter>(), ImageContract.View
 
             override fun onLoadingFailed(imageUri: String?, view: View?, failReason: FailReason?)
             {
-                presenter.onImageLoadFailed()
+                presenter.onImageLoadEnded()
             }
 
         })

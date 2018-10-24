@@ -24,14 +24,20 @@ class ImagePresenter(private val internetConnectionChecker: InternetConnectionCh
         val author = "${image.author} ${image.index}"
         val size = "${image.width}x${image.height}"
         view?.displayInfo(author, size)
-
     }
 
-    fun onImageLoadFailed()
+    // region Image Loading
+    fun onImageLoadEnded()
     {
         tryConnect()
         view?.hideLoader()
     }
+
+    fun onImageLoadStarted()
+    {
+        view?.displayLoader()
+    }
+    // endregion Image Loading
 
     private fun tryConnect()
     {
@@ -43,19 +49,6 @@ class ImagePresenter(private val internetConnectionChecker: InternetConnectionCh
             view?.hideNoInternetConnectionError()
         }
     }
-
-    // region Image Loading
-    fun onImageDisplayed()
-    {
-        tryConnect()
-        view?.hideLoader()
-    }
-
-    fun onImageLoadStarted()
-    {
-        view?.displayLoader()
-    }
-    // endregion Image Loading
 
     fun onSaveState() = image
 }
