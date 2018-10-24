@@ -82,6 +82,10 @@ class ImagesListPresenter @Inject constructor(private val imagesNetworkLoader: I
         {
             view?.displayNoInternetConnectionError()
         }
+        else
+        {
+            throwable.printStackTrace()
+        }
     }
     // endregion Load Network Images
 
@@ -146,7 +150,6 @@ class ImagesListPresenter @Inject constructor(private val imagesNetworkLoader: I
         } else
         {
             loadNetworkImages()
-            view?.hideNoInternetConnectionError()
         }
     }
 
