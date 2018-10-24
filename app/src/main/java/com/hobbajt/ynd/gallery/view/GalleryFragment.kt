@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.hobbajt.ynd.R
 import com.hobbajt.ynd.base.domain.Image
-import com.hobbajt.ynd.base.domain.ImagesState
 import com.hobbajt.ynd.base.mvp.BaseMVPFragment
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import javax.inject.Inject
@@ -33,7 +32,7 @@ class GalleryFragment : BaseMVPFragment<GalleryPresenter>(), GalleryContract.Vie
 
     override fun loadState(configurationChangeState: Bundle?, passedArguments: Bundle?)
     {
-        var galleryState = configurationChangeState?.getParcelable<ImagesState>(GALLERY_STATE_TAG)
+        var galleryState = configurationChangeState?.getParcelable<GalleryState>(GALLERY_STATE_TAG)
         if (galleryState == null)
         {
             galleryState = passedArguments?.getParcelable(GALLERY_STATE_TAG)
@@ -82,11 +81,6 @@ class GalleryFragment : BaseMVPFragment<GalleryPresenter>(), GalleryContract.Vie
         hideNoInternetConnectionError()
     }
 
-    override fun onDestroy()
-    {
-        super.onDestroy()
-    }
-
     override fun onSaveInstanceState(outState: Bundle)
     {
         super.onSaveInstanceState(outState)
@@ -102,7 +96,7 @@ class GalleryFragment : BaseMVPFragment<GalleryPresenter>(), GalleryContract.Vie
         {
             val fragment = GalleryFragment()
             val bundle = Bundle()
-            val galleryState = ImagesState(images, currentImageIndex)
+            val galleryState = GalleryState(images, currentImageIndex)
             bundle.putParcelable(GALLERY_STATE_TAG, galleryState)
             fragment.arguments = bundle
             return fragment
