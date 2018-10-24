@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">YND</string>
+    <string name="retry">Retry</string>
+    <string name="no_internet_connection">No Internet connection</string>
+</resources>

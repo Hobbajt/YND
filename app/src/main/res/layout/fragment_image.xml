@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:application="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <com.hobbajt.ynd.image.view.gestureimageview.GestureImageView
+        android:id="@+id/imgImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        application:layout_constraintBottom_toBottomOf="parent"
+        application:layout_constraintEnd_toEndOf="parent"
+        application:layout_constraintStart_toStartOf="parent"
+        application:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <View
+        android:id="@+id/vInfoBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/transparentGrey"
+        application:layout_constraintBottom_toBottomOf="parent"
+        application:layout_constraintEnd_toEndOf="parent"
+        application:layout_constraintStart_toStartOf="parent"
+        application:layout_constraintTop_toTopOf="@id/txtAuthor" />
+
+
+    <TextView
+        android:id="@+id/txtAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp"
+        android:paddingTop="8dp"
+        android:textColor="@color/white"
+        application:layout_constraintBottom_toTopOf="@id/txtSize"
+        application:layout_constraintEnd_toEndOf="@id/vInfoBackground"
+        application:layout_constrainedHeight="true"
+        application:layout_constraintHorizontal_bias="0.0"
+        application:layout_constraintStart_toStartOf="@id/vInfoBackground"
+        tools:text="John Smith" />
+
+    <TextView
+        android:id="@+id/txtSize"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="4dp"
+        android:textColor="@color/white"
+        application:layout_constraintBottom_toBottomOf="@+id/vInfoBackground"
+        application:layout_constraintEnd_toEndOf="@id/vInfoBackground"
+        application:layout_constrainedHeight="true"
+        application:layout_constraintHorizontal_bias="0.0"
+        application:layout_constraintStart_toStartOf="@id/vInfoBackground"
+        tools:text="1920x1080" />
+
+    <ProgressBar
+        android:id="@+id/pbLoader"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_centerHorizontal="true"
+        application:layout_constraintBottom_toBottomOf="parent"
+        application:layout_constraintEnd_toEndOf="parent"
+        application:layout_constraintStart_toStartOf="parent"
+        application:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

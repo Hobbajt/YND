@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hobbajt.ynd.gallery.view.edgeswipeviewpager.EdgeSwipeViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:application="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/vpGallery"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    application:layout_constraintBottom_toBottomOf="parent"
+    application:layout_constraintEnd_toEndOf="parent"
+    application:layout_constraintStart_toStartOf="parent"
+    application:layout_constraintTop_toTopOf="parent" />

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:application="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvImages"
+        application:layout_constraintTop_toTopOf="parent"
+        application:layout_constraintBottom_toBottomOf="parent"
+        application:layout_constraintStart_toStartOf="parent"
+        application:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_image"
+        android:scrollbars="vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+
+    <ProgressBar
+        android:id="@+id/pbLoader"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_centerHorizontal="true"
+        application:layout_constraintBottom_toBottomOf="parent"
+        application:layout_constraintEnd_toEndOf="parent"
+        application:layout_constraintStart_toStartOf="parent"
+        application:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
