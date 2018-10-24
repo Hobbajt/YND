@@ -97,11 +97,6 @@ class ImageFragment : BaseMVPFragment<ImagePresenter>(), ImageContract.View
         })
     }
 
-    override fun onDestroy()
-    {
-        super.onDestroy()
-    }
-
     // region Internet Connection
     override fun displayNoInternetConnectionError()
     {
