@@ -20,6 +20,9 @@ import org.mockito.junit.MockitoJUnitRunner
 class ImagesListPresenterTest
 {
     @Mock
+    lateinit var view: ImagesListContract.View
+
+    @Mock
     lateinit var imagesNetworkLoader: ImagesNetworkLoader
 
     @Mock
@@ -27,9 +30,6 @@ class ImagesListPresenterTest
 
     @Mock
     lateinit var internetConnectionChecker: InternetConnectionChecker
-
-    @Mock
-    lateinit var view: ImagesListContract.View
 
     lateinit var presenter: ImagesListPresenter
 
@@ -41,9 +41,10 @@ class ImagesListPresenterTest
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
 
         internetConnectionChecker = Mockito.spy(internetConnectionChecker)
+        imagesNetworkLoader = Mockito.spy(imagesNetworkLoader)
 
+        Mockito.doReturn(Single.just(images)).`when`(imagesNetworkLoader).load()
         Mockito.doReturn(Single.just(arrayListOf<Image>())).`when`(imageDatabaseDao).load()
-        Mockito.doReturn(false).`when`(internetConnectionChecker).isConnected()
 
         presenter = Mockito.spy(ImagesListPresenter(imagesNetworkLoader, imageDatabaseDao, internetConnectionChecker))
 
@@ -75,12 +76,9 @@ class ImagesListPresenterTest
     @Test
     fun onLoadStateCompleteNetworkTest()
     {
-
         val imagesListState = ImagesListState(images, 15, ImagesListPresenter.ImagesSourceType.NETWORK)
-        presenter.onLoadStateComplete(imagesListState)
-        Mockito.verify(view).displayLoader()
-        Mockito.verify(view).createNoInternetConnectionSnackbar()
-        Mockito.verify(view).createImagesList()
+
+        testInit(imagesListState)
 
         Mockito.verify(view).hideLoader()
         Mockito.verify(view).displayImages(eq(images), Mockito.eq(15))
@@ -88,19 +86,42 @@ class ImagesListPresenterTest
     }
 
     @Test
-    fun onLoadStateCompleteLocalTest()
+    fun onLoadStateCompleteLocalWithoutInternetTest()
     {
+        Mockito.doReturn(false).`when`(internetConnectionChecker).isConnected()
         val imagesListState = ImagesListState(images, 15, ImagesListPresenter.ImagesSourceType.LOCAL)
-        presenter.onLoadStateComplete(imagesListState)
-        Mockito.verify(view).displayLoader()
-        Mockito.verify(view).createNoInternetConnectionSnackbar()
-        Mockito.verify(view).createImagesList()
+
+        testInit(imagesListState)
 
         Mockito.verify(internetConnectionChecker).isConnected()
         Mockito.verify(view).displayNoInternetConnectionError()
         Assert.assertEquals(presenter.onSaveState(), imagesListState)
-
-
     }
 
+    @Test
+    fun onLoadStateCompleteLocalWithInternetTest()
+    {
+        Mockito.doReturn(true).`when`(internetConnectionChecker).isConnected()
+
+        val imagesListState = ImagesListState(emptyList(), 15, ImagesListPresenter.ImagesSourceType.LOCAL)
+        val networkImagesListState = ImagesListState(images, 0, ImagesListPresenter.ImagesSourceType.NETWORK)
+
+        testInit(imagesListState)
+
+        Mockito.verify(internetConnectionChecker).isConnected()
+        Mockito.verify(imagesNetworkLoader).load()
+        Assert.assertEquals(presenter.onSaveState(), networkImagesListState)
+
+        Mockito.verify(view).hideNoInternetConnectionError()
+        Mockito.verify(view).hideLoader()
+        Mockito.verify(view).displayImages(eq(images), Mockito.eq(0))
+    }
+
+    private fun testInit(imagesListState: ImagesListState)
+    {
+        presenter.onLoadStateComplete(imagesListState)
+        Mockito.verify(view).displayLoader()
+        Mockito.verify(view).createNoInternetConnectionSnackbar()
+        Mockito.verify(view).createImagesList()
+    }
 }
