@@ -16,9 +16,4 @@ interface ImagesListContract
         fun createImagesList()
         fun getFirstVisibleItemPosition(): Int
     }
-
-    interface ImageHolderView
-    {
-        fun bind(image: Image)
-    }
 }
