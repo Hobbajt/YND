@@ -41,12 +41,12 @@ class ImagesListAdapter(private val thumbnailLoadListener: ThumbnailLoadListener
         notifyDataSetChanged()
     }
 
-    inner class ImageItemHolder(val view: View) : RecyclerView.ViewHolder(view), ImagesListContract.ImageHolderView
+    inner class ImageItemHolder(val view: View) : RecyclerView.ViewHolder(view)
     {
         private val txtAuthor: TextView = view.txtAuthor
         private val imgImage: ImageView = view.imgImage
 
-        override fun bind(image: Image)
+        fun bind(image: Image)
         {
             view.setOnClickListener { itemClickListener.onItemClick(adapterPosition) }
             displayThumbnail(image)
